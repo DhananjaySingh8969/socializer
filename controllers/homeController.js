@@ -1,4 +1,6 @@
 module.exports.home=function(req,res)
 {
-    return res.end('<h1>This is Home</h1>');
+    return res.render('home',{
+        title:"socializer/home"
+    })
 }
