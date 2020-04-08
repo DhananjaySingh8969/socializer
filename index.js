@@ -3,13 +3,15 @@ const port=8000;
 const app=express();
 
 //setting up static files
-app.use(express.static('./assets'));
-
+app.use(express.static('./assets'))
 
 //adding layouts
 const expressLayouts=require('express-ejs-layouts');
 app.use(expressLayouts);
 
+//extract style and scripts tag form the sub pages into the layout
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
 //Accessing route module
 const router=app.use('/',require('./routes'));
