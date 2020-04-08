@@ -2,6 +2,10 @@ const express=require('express');
 const port=8000;
 const app=express();
 
+///requiring the database from config 
+const db=require('./config/mongoose');
+
+
 //setting up static files
 app.use(express.static('./assets'))
 
