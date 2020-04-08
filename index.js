@@ -2,6 +2,10 @@ const express=require('express');
 const port=8000;
 const app=express();
 
+//adding layouts
+const expressLayouts=require('express-ejs-layouts');
+app.use(expressLayouts);
+
 
 //Accessing route module
 const router=app.use('/',require('./routes'));
