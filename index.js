@@ -2,6 +2,10 @@ const express=require('express');
 const port=8000;
 const app=express();
 
+//setting up static files
+app.use(express.static('./assets'));
+
+
 //adding layouts
 const expressLayouts=require('express-ejs-layouts');
 app.use(expressLayouts);
