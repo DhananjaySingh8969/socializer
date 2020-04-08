@@ -1,6 +1,6 @@
 module.exports.profile=function(req,res){
-    return res.end('<h1>USER PROFILE</h1>');
+    return res.render('../views/user_profile.ejs',{});
 }
 module.exports.post=function(req,res){
-    return res.end('<h1>USER POST</h1>');
+    return res.render('../views/user_post.ejs',{});
 }
