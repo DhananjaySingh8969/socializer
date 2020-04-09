@@ -1,6 +1,21 @@
 const User=require('../models/user');
 module.exports.profile=function(req,res){
-    return res.render('../views/user_profile.ejs',{});
+    if(req.cookies.user_id)
+    {
+            User.findById(req.cookies.user_id,function(err,user){
+                    if(err)
+                    {
+                        console.log('error in finding user by cookies id');
+                        return ;
+                    }
+                    return res.render('user_profile.ejs',{
+                        user:user
+                    });
+            });
+    }else{
+        return res.redirect('/users/sign-in');
+    }
+    // 
 }
 module.exports.post=function(req,res){
     return res.render('../views/user_post.ejs',{});
