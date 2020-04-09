@@ -1,10 +1,15 @@
 const express=require('express');
+const cookieParser=require('cookie-parser');
 const port=8000;
 const app=express();
-
 ///requiring the database from config 
 const db=require('./config/mongoose');
 
+//setting cookie
+app.use(cookieParser());
+
+//for parsing post data
+app.use(express.urlencoded());
 
 //setting up static files
 app.use(express.static('./assets'))

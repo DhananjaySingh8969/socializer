@@ -15,3 +15,13 @@ module.exports.signUp=function(req,res)
         title:"socializer/sign-Up"
     })
 }
+
+//user sign up
+module.exports.create=function(req,res){
+       //todo later
+};
+
+//user sign in create a session
+module.exports.createSession=function(req,res){
+    //todo later
+};
