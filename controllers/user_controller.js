@@ -28,7 +28,7 @@ module.exports.create = function(req, res){
         if(err)
         {
             console.log('error in finding user in signing up'); 
-            return
+            return;
         }
 
         if (!user)
@@ -48,5 +48,35 @@ module.exports.create = function(req, res){
 
 //user sign in create a session
 module.exports.createSession=function(req,res){
-
+      //steps to mannual authentication
+      //find the user
+      User.findOne({email:req.body.email},function(err,user){
+            if(err)
+            {   
+                console.log('error in finding user in sign in');
+                return ;
+            }
+            //user found
+            if(user)
+            {
+                
+                //user password doesnt match
+                if(user.password!=req.body.password)
+                {   
+                    console.log('users password is wrong');
+                    return res.redirect('/users/sign-in');
+                }
+                //creating user session
+                res.cookie('user_id',user.id);
+                return res.redirect('/users/profile');
+            }
+            else
+            {
+                 //user deoes not found
+                 console.log('user doesnt have an account'); 
+                 return res.redirect('/users/sign-up');
+            }
+      });
+      
+      
 }
