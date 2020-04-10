@@ -6,6 +6,7 @@ module.exports.profile=function(req,res){
                     if(err)
                     {
                         console.log('error in finding user by cookies id');
+                        res.redirect('/users/sign-in');
                         return ;
                     }
                     return res.render('user_profile.ejs',{
@@ -21,15 +22,53 @@ module.exports.post=function(req,res){
     return res.render('../views/user_post.ejs',{});
 }
 module.exports.signIn=function(req,res){
-    return res.render('../views/user_sign_in.ejs',{
-        title:"socializer/sign-in"
-    });
+    // console.log(1);
+    if(req.cookies.user_id)
+    {      
+            User.findById(req.cookies.user_id,function(err,user){
+                    
+                    if(err)
+                    {
+                        // console.log(3);
+                        console.log('error in finding user by cookies id');
+                        return res.render('user_sign_in');
+                        return ;
+                    }
+                    console.log(4);
+                    return res.redirect('/users/profile');
+            });
+    }else{
+        // console.log(5);
+        return res.render('user_sign_in');
+    }
+    // console.log(6);
+    
 }
 module.exports.signUp=function(req,res)
-{
-    return res.render('../views/user_sign_up',{
-        title:"socializer/sign-Up"
-    })
+{    
+    // console.log(1);
+    if(req.cookies.user_id)
+    {        
+            User.findById(req.cookies.user_id,function(err,user){
+                    
+                    if(err)
+                    {
+                        // console.log(3);
+                        console.log('error in finding user by cookies id');
+                        return res.redirect('/users/sign-in');
+                        return ;
+                    }
+                    // console.log(4);
+                    return res.redirect('/users/profile');
+            });
+    }else{
+        // console.log(5);
+        return res.render('../views/user_sign_up',{
+            title:"socializer/sign-Up"
+        })
+    }
+    // console.log(6);
+   
 }
 
 //user create
@@ -94,4 +133,12 @@ module.exports.createSession=function(req,res){
       });
       
       
+}
+
+//user sign-out
+module.exports.signOut=function(req,res){
+        // res.cookie('user_id',null);
+        res.clearCookie("user_id");
+        console.log('user has been signed out');
+        return res.redirect('/users/sign-in');
 }
