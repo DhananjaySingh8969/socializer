@@ -5,6 +5,11 @@ const app=express();
 ///requiring the database from config 
 const db=require('./config/mongoose');
 
+// used for session cookie
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+
 //setting cookie
 app.use(cookieParser());
 
@@ -22,16 +27,28 @@ app.use(expressLayouts);
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
-//Accessing route module
-const router=app.use('/',require('./routes'));
+
 
 //setting up view engine
 app.set('view engine','ejs');
 app.set('Views','./views')
 
+app.use(session({
+    name: 'socializer',
+    // TODO change the secret before deployment in production mode
+    secret: 'blahsomething',
+    saveUninitialized: false,
+    resave: false,
+    cookie: {
+        maxAge: (1000 * 60 * 100)
+    }
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
-
+// use express router
+app.use('/', require('./routes'));
 
 app.listen(port,function(err){
       if(err)
@@ -39,5 +56,6 @@ app.listen(port,function(err){
           console.log(`Error on port number ${port}`);
           return ;
       }
+      
       console.log(`Server is up and running on port number: ${port}`);
 });
