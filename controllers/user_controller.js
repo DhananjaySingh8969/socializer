@@ -6,12 +6,20 @@ module.exports.post=function(req,res){
     return res.render('../views/user_post.ejs',{});
 }
 module.exports.signIn=function(req,res){
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/users/profile');
+    }
     return res.render('../views/user_sign_in.ejs',{
         title:"socializer/sign-in"
     });
 }
 module.exports.signUp=function(req,res)
-{
+{   
+    if(req.isAuthenticated())
+    {
+        return res.redirect('/users/profile');
+    }
     return res.render('../views/user_sign_up',{
         title:"socializer/sign-Up"
     })
