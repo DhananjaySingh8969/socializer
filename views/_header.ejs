@@ -5,5 +5,22 @@
     </head>
     <body>
         <h2>this is header</h2>
+        <h4>
+            <ul>
+                <% if(locals.user) {%>
+                    
+                    <li>
+                        <a href="/users/profile">
+                            <%=user.name%>
+                        </a>
+                        
+                    </li>
+                    <li><a href="/users/sign-out"> Sign-out</a></li>
+                <% }else{ %>
+                    <li><a href="/users/sign-in"> Sign-in</a></li>
+                    <li><a href="/users/sign-up"> Sign-up</a></li>
+                <% } %>
+            </ul>
+        </h4>
     </body>
 </html>
