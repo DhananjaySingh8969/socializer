@@ -4,6 +4,18 @@
 
     </head>
     <body>
-        <h2>this is footer</h2>
+        <div class="footer-main">
+            <h3 class="title">@This is footer</h3>
+            <h3 class="nav">
+               
+                <% if(locals.user) {%>
+                <a href="/users/profile">
+                        <%=user.name%>
+                </a>        
+                <% } %>
+                <a href="/"> Home</a>
+            </h3>
+        </div>
+        
     </body>
 </html>

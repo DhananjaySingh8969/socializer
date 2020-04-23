@@ -8,7 +8,7 @@ passport.use(new LocalStrategy({
         usernameField: 'email'
     },
     function(email, password, done){
-        console.log('user has been lrerewoged');
+        // console.log('user has been lrerewoged');
         // find a user and establish the identity
         User.findOne({email: email}, function(err, user)  {
             if (err){
