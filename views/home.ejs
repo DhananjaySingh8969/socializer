@@ -2,32 +2,39 @@
 <link rel="stylesheet" href="/css/home.css">
 
 <main class="home-main">
-    <h1 class=>SOCIALIZER/<%=title%></h1>
+    <header><h1>SOCIALIZER/<%=title%></h1></header>
     <%if(locals.user){%>
         <div class="post">
             <h3>POST</h3>
-             <form id="new-post-form" method="POST" action="/post/create">
-                   <textarea name="content" cols="30" rows="2" placeholder="type here...." required></textarea>
-                   <button class="btn btn-success" type="submit">post</button>
-             </form>
-        </div>
+            <form id="new-post-form" method="POST" action="/post/create">
+                <textarea name="content" cols="30" rows="2" placeholder="type here...." required></textarea>
+                <button class="btn btn-success" type="submit">post</button>
+            </form>
+        </div>    
     <%}%>
     
     <div class="list-group post-container">
         <%for(let post of posts){%>
             <div class="list-group-item list-group-item-action post-item">
                 <div class="d-flex w-100 justify-content-between">
-                  <h5 class="mb-1"><%=post.user.name%></h5>
-                  <small><%=post.createdAt%></small>
+                    <div class="m-1">
+                        <h3 class="d-inline"><%=post.user.name%></h3>
+                        <%if(locals.user && locals.user.id==post.user.id){%>
+                           <a class="btn btn-secondary btn-danger d-inline"  href="/post/destroy/<%=post._id%>" role="button" aria-expanded="false" >
+                               Delete
+                           </a>
+                       <%}%>
+                    </div>
+                    <small><%=post.createdAt%></small>
                 </div>
                 <p class="mb-1 overflow-auto"><%=post.content%></p>
                 <div class="comment-section">
-                    <p>
+                    <p class="btn-group" role="group">
                         <a class="btn btn-secondary comments-drop-down" data-toggle="collapse" href="#post<%=post._id%>" role="button" aria-expanded="false" aria-controls="post<%=post._id%>">
                             comments
-                        </a>
+                        </a>  
                     </p>
-                    <div class="collapse" id="post<%=post._id%>">
+                    <div class="collapse show" id="post<%=post._id%>">
                         <%if(locals.user){%>
                             <div class="create-comment">
                                 <p>
@@ -50,8 +57,8 @@
                             <ol>
                                 <%for(let comment of post.comments){%>
                                     <li>
-                                        <p class="comment-content"><%=comment.content%></p>
-                                        <small class="alert-link">
+                                        <p class="comment-content d-inline"><%=comment.content%></p>
+                                        <small class="alert-link d-inline">
                                             <%=comment.user.name%>
                                         </small>
                                     </li>

@@ -1,12 +1,14 @@
 .home-main {
   background-color: cornflowerblue;
-  align-content: center;
-  text-align: center;
-  min-height: 90vh; }
+  min-height: 90vh;
+  padding: 10px; }
+
+.post {
+  margin: 5px;
+  text-align: center; }
 
 .post-container {
   width: 80%;
-  text-align: center;
   margin-top: 20px;
   margin-left: 10%; }
 
@@ -31,3 +33,9 @@
   height: auto;
   margin: 0px;
   padding: 2px; }
+
+.post-delete-btn {
+  padding: 0px;
+  padding-top: 0px;
+  margin: 0px;
+  height: auto; }
