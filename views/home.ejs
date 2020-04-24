@@ -7,8 +7,8 @@
         <div class="post">
             <h3>POST</h3>
              <form id="new-post-form" method="POST" action="/post/create">
-                   <textarea name="content" cols="30" rows="3" placeholder="type here...."></textarea>
-                   <br><button type="submit">post</button>
+                   <textarea name="content" cols="30" rows="2" placeholder="type here...." required></textarea>
+                   <button class="btn btn-success" type="submit">post</button>
              </form>
         </div>
     <%}%>
@@ -21,11 +21,47 @@
                   <small><%=post.createdAt%></small>
                 </div>
                 <p class="mb-1 overflow-auto"><%=post.content%></p>
-                <small></small>
+                <div class="comment-section">
+                    <p>
+                        <a class="btn btn-secondary comments-drop-down" data-toggle="collapse" href="#post<%=post._id%>" role="button" aria-expanded="false" aria-controls="post<%=post._id%>">
+                            comments
+                        </a>
+                    </p>
+                    <div class="collapse" id="post<%=post._id%>">
+                        <%if(locals.user){%>
+                            <div class="create-comment">
+                                <p>
+                                    <a class="btn btn-outline-primary add-comment-btn" data-toggle="collapse" href="#newCmt<%=post._id%>" role="button" aria-expanded="false" aria-controls="newCmt<%=post._id%>">
+                                        comment+
+                                    </a>
+                                </p>
+                                <div class="collapse" id="newCmt<%=post._id%>">
+                                    <form method="POST" action="/comment/create">
+                                        <div class="mb-3">
+                                            <textarea name="content" class="form-control"  placeholder="comment here.." required></textarea>
+                                            <input type="hidden" name="postId" value="<%=post._id%>">
+                                            <button class="btn btn-dark comment-submit-btn" type="submit">submit</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        <%}%>
+                        <div class="comments-contianer">
+                            <ol>
+                                <%for(let comment of post.comments){%>
+                                    <li>
+                                        <p class="comment-content"><%=comment.content%></p>
+                                        <small class="alert-link">
+                                            <%=comment.user.name%>
+                                        </small>
+                                    </li>
+                                <%}%>
+                            </ol>
+                        </div> 
+                    </div>
+                </div> 
             </div>
         <%}%>
-        
-        
     </div>
 </main>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
