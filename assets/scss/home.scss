@@ -1,3 +1,20 @@
 .home-main{
-    height: 80vh;
+    background-color: cornflowerblue;
+    align-content: center;
+    text-align: center;
+    min-height: 90vh;
+}
+.post-container{
+    width: 80%;
+    text-align: center;
+    margin-top:20px;
+    margin-left:10%;
+}
+.post-item{
+    margin: 2px;
+}
+.post-content{
+    width: 100%!important;
+    max-height: 100%;
+    overflow: wrap;
 }
