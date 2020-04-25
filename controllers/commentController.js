@@ -2,31 +2,7 @@ const Comment=require('../models/comment');
 const Post =require('../models/post');
 module.exports.create=function(req,res)
 {   
-    // console.log(req.user);
-    // adding comment to db
-    // Comment.create({
-    //     content:req.body.content,
-    //     user:req.user._id,
-    //     post:req.body.postId
-    // }, 
-    // function(err,cmt){
-    //         if(err){console.log('error in inserting comment in db'); return}
-    //         //adding comment reference to post
-    //         Post.findByIdAndUpdate(req.body.postId
-    //             ,{$push: { comments: [cmt._id] } }
-    //             ,function(err,rslt){
-    //                 if(err)
-    //                 {
-    //                         console.log("error in adding comment reference to post");
-    //                         return ;
-    //                 }
-    //                 console.log("comment in post has beem added",rslt);
-    //                 return ;
-    //             });
-    //         console.log('comment has been posted');
-    //         return res.redirect('back');
-    // })
-    
+   
     //2nd method to adding comment in post and comment collection
     Post.findById(req.body.postId,function(err,post){
             if(err)
@@ -54,4 +30,39 @@ module.exports.create=function(req,res)
     });
     // console.log(req.body);
     // return res.redirect('back');
+}
+module.exports.destroy=function(req,res)
+{
+    Comment.findById(req.params.id,function(err,comment){
+                 if(err)
+                 {
+                     console.log("error in deleting comment-1")
+                     return ;
+                 }
+                //  if(comment.post.id==req.user.id)
+                //  {
+                    let commentTOBeDeleted=comment;
+                     comment.remove();
+                    Post.findById(commentTOBeDeleted.post,function(err,post){
+                            if(err)
+                            {
+                                console.log("error in deleting comment-2")
+                                return ;
+                            }
+                            if(commentTOBeDeleted.user==req.user.id || (post.user==req.user.id))
+                            {
+                                const index = post.comments.indexOf(commentTOBeDeleted.id);
+                                if (index > -1) {
+                                   post.comments.splice(index, 1);
+                                }
+                                post.save();
+                                return res.redirect('back');
+                            }else{
+                                console.log("unautherized to delete the comment");
+                                return res.redirect('back');
+                            }
+                            
+                    });
+               
+    });
 }

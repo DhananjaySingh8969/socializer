@@ -8,9 +8,9 @@
   text-align: center; }
 
 .post-container {
-  width: 80%;
-  margin-top: 20px;
-  margin-left: 10%; }
+  width: 90%;
+  margin-top: 10px;
+  margin-left: 5%; }
 
 .post-item {
   margin: 2px; }
@@ -39,3 +39,16 @@
   padding-top: 0px;
   margin: 0px;
   height: auto; }
+
+.capitalize {
+  text-transform: capitalize; }
+
+.inset-text {
+  /* Shadows are visible under slightly transparent text color */
+  color: #282c33;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.3em; }
+
+.danger-color {
+  color: #dc3545 !important; }

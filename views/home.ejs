@@ -18,7 +18,7 @@
             <div class="list-group-item list-group-item-action post-item">
                 <div class="d-flex w-100 justify-content-between">
                     <div class="m-1">
-                        <h3 class="d-inline"><%=post.user.name%></h3>
+                        <h3 class="d-inline capitalize"><%=post.user.name%></h3>
                         <%if(locals.user && locals.user.id==post.user.id){%>
                            <a class="btn btn-secondary btn-danger d-inline"  href="/post/destroy/<%=post._id%>" role="button" aria-expanded="false" >
                                Delete
@@ -27,7 +27,7 @@
                     </div>
                     <small><%=post.createdAt%></small>
                 </div>
-                <p class="mb-1 overflow-auto"><%=post.content%></p>
+                <p class="mb-1 overflow-auto inset-text"><%=post.content%></p>
                 <div class="comment-section">
                     <p class="btn-group" role="group">
                         <a class="btn btn-secondary comments-drop-down" data-toggle="collapse" href="#post<%=post._id%>" role="button" aria-expanded="false" aria-controls="post<%=post._id%>">
@@ -39,7 +39,7 @@
                             <div class="create-comment">
                                 <p>
                                     <a class="btn btn-outline-primary add-comment-btn" data-toggle="collapse" href="#newCmt<%=post._id%>" role="button" aria-expanded="false" aria-controls="newCmt<%=post._id%>">
-                                        comment+
+                                       add comment+
                                     </a>
                                 </p>
                                 <div class="collapse" id="newCmt<%=post._id%>">
@@ -61,6 +61,9 @@
                                         <small class="alert-link d-inline">
                                             <%=comment.user.name%>
                                         </small>
+                                        <%if(locals.user && (locals.user.id==post.user.id || comment.user.id==locals.user.id)){%>
+                                         <a class="d-inline" href="/comment/destroy/<%=comment.id%>"><i class="fas fa-trash fa-xs danger-color"></i></a>
+                                        <%}%>
                                     </li>
                                 <%}%>
                             </ol>

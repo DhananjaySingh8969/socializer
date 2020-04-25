@@ -11,10 +11,10 @@
     text-align: center;
 }
 .post-container{
-    width: 80%;
+    width: 90%;
     // text-align: center;
-    margin-top:20px;
-    margin-left:10%;
+    margin-top:10px;
+    margin-left:5%;
 }
 .post-item{
     margin: 2px;
@@ -43,4 +43,19 @@
     padding-top:0px;
     margin: 0px;
     height: auto;
+}
+.capitalize{
+    text-transform: capitalize;
+}
+.inset-text {
+    /* Shadows are visible under slightly transparent text color */
+    color:rgb(40, 44, 51);
+    // text-shadow: 1px 4px 6px #def, 0 0 0 #000, 1px 4px 6px #def;
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    font-size: 1.3em;
+    // line-height: 1em;
+}
+.danger-color{
+    color: rgb(220,53,69)!important;
 }
