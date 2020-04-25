@@ -1,0 +1,15 @@
+<div class="comments-contianer">
+    <ol>
+        <%for(let comment of post.comments){%>
+            <li>
+                <p class="comment-content d-inline"><%=comment.content%></p>
+                <small class="alert-link d-inline">
+                    <%=comment.user.name%>
+                </small>
+                <%if(locals.user && (locals.user.id==post.user.id || comment.user.id==locals.user.id)){%>
+                <a class="d-inline" href="/comment/destroy/<%=comment.id%>"><i class="fas fa-trash fa-xs danger-color"></i></a>
+                <%}%>
+            </li>
+        <%}%>
+    </ol>
+</div>

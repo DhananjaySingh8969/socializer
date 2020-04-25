@@ -1,0 +1,11 @@
+<div class="comment-section">
+    <p class="btn-group" role="group">
+        <a class="btn btn-secondary comments-drop-down" data-toggle="collapse" href="#post<%=post._id%>" role="button" aria-expanded="false" aria-controls="post<%=post._id%>">
+            comments
+        </a>  
+    </p>
+    <div class="collapse show" id="post<%=post._id%>">
+        <%-include('_commentForm',{post:post}); %>
+        <%-include('_comments',{post:post}); %> 
+    </div>
+</div> 

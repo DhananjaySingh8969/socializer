@@ -3,74 +3,12 @@
 
 <main class="home-main">
     <header><h1>SOCIALIZER/<%=title%></h1></header>
-    <%if(locals.user){%>
-        <div class="post">
-            <h3>POST</h3>
-            <form id="new-post-form" method="POST" action="/post/create">
-                <textarea name="content" cols="30" rows="2" placeholder="type here...." required></textarea>
-                <button class="btn btn-success" type="submit">post</button>
-            </form>
-        </div>    
-    <%}%>
+    
+    <%-include('./post/_postForm');%>
     
     <div class="list-group post-container">
         <%for(let post of posts){%>
-            <div class="list-group-item list-group-item-action post-item">
-                <div class="d-flex w-100 justify-content-between">
-                    <div class="m-1">
-                        <h3 class="d-inline capitalize"><%=post.user.name%></h3>
-                        <%if(locals.user && locals.user.id==post.user.id){%>
-                           <a class="btn btn-secondary btn-danger d-inline"  href="/post/destroy/<%=post._id%>" role="button" aria-expanded="false" >
-                               Delete
-                           </a>
-                       <%}%>
-                    </div>
-                    <small><%=post.createdAt%></small>
-                </div>
-                <p class="mb-1 overflow-auto inset-text"><%=post.content%></p>
-                <div class="comment-section">
-                    <p class="btn-group" role="group">
-                        <a class="btn btn-secondary comments-drop-down" data-toggle="collapse" href="#post<%=post._id%>" role="button" aria-expanded="false" aria-controls="post<%=post._id%>">
-                            comments
-                        </a>  
-                    </p>
-                    <div class="collapse show" id="post<%=post._id%>">
-                        <%if(locals.user){%>
-                            <div class="create-comment">
-                                <p>
-                                    <a class="btn btn-outline-primary add-comment-btn" data-toggle="collapse" href="#newCmt<%=post._id%>" role="button" aria-expanded="false" aria-controls="newCmt<%=post._id%>">
-                                       add comment+
-                                    </a>
-                                </p>
-                                <div class="collapse" id="newCmt<%=post._id%>">
-                                    <form method="POST" action="/comment/create">
-                                        <div class="mb-3">
-                                            <textarea name="content" class="form-control"  placeholder="comment here.." required></textarea>
-                                            <input type="hidden" name="postId" value="<%=post._id%>">
-                                            <button class="btn btn-dark comment-submit-btn" type="submit">submit</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        <%}%>
-                        <div class="comments-contianer">
-                            <ol>
-                                <%for(let comment of post.comments){%>
-                                    <li>
-                                        <p class="comment-content d-inline"><%=comment.content%></p>
-                                        <small class="alert-link d-inline">
-                                            <%=comment.user.name%>
-                                        </small>
-                                        <%if(locals.user && (locals.user.id==post.user.id || comment.user.id==locals.user.id)){%>
-                                         <a class="d-inline" href="/comment/destroy/<%=comment.id%>"><i class="fas fa-trash fa-xs danger-color"></i></a>
-                                        <%}%>
-                                    </li>
-                                <%}%>
-                            </ol>
-                        </div> 
-                    </div>
-                </div> 
-            </div>
+           <%-include('./post/_main.ejs',{post:post}); %>
         <%}%>
     </div>
 </main>

@@ -1,0 +1,9 @@
+<%if(locals.user){%>
+    <div class="post">
+        <h3>POST</h3>
+        <form id="new-post-form" method="POST" action="/post/create">
+            <textarea name="content" cols="30" rows="2" placeholder="type here...." required></textarea>
+            <button class="btn btn-success" type="submit">post</button>
+        </form>
+    </div>    
+<%}%>
