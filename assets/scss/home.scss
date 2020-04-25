@@ -1,20 +1,38 @@
-.home-main{
+.post-main{
     background-color: cornflowerblue;
     // align-content: center;
     // text-align: center;
     min-height: 90vh;
     // margin:10px;
     padding: 10px;
+    // width: 20%;
+    // position: absolute;
+    // left:20px;
 }
 .post{
     margin:5px;
     text-align: center;
 }
 .post-container{
-    width: 90%;
+    width: 60%;
     // text-align: center;
     margin-top:10px;
-    margin-left:5%;
+    margin-left:8%;
+    display:inline-block;
+}
+.friends-contianer{
+    vertical-align: top;
+    display: inline-block;
+    margin-left: 2%;
+    margin-top: 10px;
+    width: 25%;
+    height: 90%;
+    min-height: 100vh;
+    text-align: center;
+    padding: 20px;
+}
+.blue{
+    color:blue;
 }
 .post-item{
     margin: 2px;
@@ -58,4 +76,36 @@
 }
 .danger-color{
     color: rgb(220,53,69)!important;
+}
+aside{
+//  position: absolute;;
+//   right:20px;
+//   top:2px;
+//   vertical-align: top;
+}
+.black{
+    color:black;
+}
+.under-line{
+    text-decoration: underline;
+}
+
+.custom-text{
+    font-size: 1.3rem;
+    font-family: sans-serif;
+    font-weight: 450;
+    text-transform: capitalize;
+   
+}
+.mgb20{
+      margin-bottom: 20px;
+}
+.mg10{
+    margin: 10px;
+}
+.mg5{
+    margin:5px;
+}
+.friend{
+    margin-bottom: 2px!important;
 }

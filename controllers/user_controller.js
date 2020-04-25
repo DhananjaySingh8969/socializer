@@ -1,6 +1,14 @@
 const User=require('../models/user');
 module.exports.profile=function(req,res){
-    return res.render('../views/user_profile.ejs',{});
+    User.findById(req.params.id,function(err,user){
+        if(err)
+        {
+            console.log(err);
+            return ;
+        }
+        return res.render('../views/user_profile.ejs',{all_user:user});
+    });
+    
 }
 module.exports.post=function(req,res){
     return res.render('../views/user_post.ejs',{});

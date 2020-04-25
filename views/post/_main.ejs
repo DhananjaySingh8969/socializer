@@ -3,13 +3,13 @@
             <div class="m-1">
                 <h3 class="d-inline capitalize"><%=post.user.name%></h3>
                 <%if(locals.user && locals.user.id==post.user.id){%>
-                <a class="btn btn-secondary btn-danger d-inline"  href="/post/destroy/<%=post._id%>" role="button" aria-expanded="false" >
-                    Delete
-                </a>
-            <%}%>
+                    <a class="btn btn-secondary btn-danger d-inline"  href="/post/destroy/<%=post._id%>" role="button" aria-expanded="false" >
+                        Delete
+                    </a>
+                <%}%>
             </div>
             <small><%=post.createdAt%></small>
         </div>
         <p class="mb-1 overflow-auto inset-text"><%=post.content%></p>
         <%-include('../comment_section/_main.ejs',{post:post}); %>
-</div>
+ </div>

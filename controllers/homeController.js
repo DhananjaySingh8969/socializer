@@ -19,10 +19,20 @@ module.exports.home=function(req,res)
                 console.log('error in fetching posts');
             }
             // console.log(posts);
-            return res.render('home',{
-                title:"HOME",
-                posts:posts
+            User.find({},function(err,friends)
+            {
+                       if(err)
+                       {
+                           console.log(err);
+                           return ;
+                       }
+                       return res.render('home',{
+                        title:"HOME",
+                        posts:posts,
+                        friends:friends
+                    })
             })
+           
     });
     
 }
