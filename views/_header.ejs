@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-
     </head>
     <body>
+        
         <div class="header-container">
             <div class="header-title">
                 <h2 >Socializer</h2>
@@ -14,7 +14,7 @@
                         <% if(locals.user) {%>
                             
                             <li>
-                                <a href="/users/profile/user.id">
+                                <a  href="/users/profile/<%=user.id%>">
                                     <%=user.name%>
                                 </a>
                                 

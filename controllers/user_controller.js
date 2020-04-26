@@ -71,3 +71,38 @@ module.exports.destroySession=function(req,res)
     req.logout();
     return res.redirect('/');
 }
+module.exports.update=function(req,res)
+{   
+    // console.log(req.body);
+    if(req.user && req.user.id==req.params.id)
+    {
+              
+        User.find({email:req.body.email},function(err,user){
+                if(err)
+                {    
+                    console.log(err);
+                    return ;
+                } 
+                //email already exist in Db
+                // console.log(user);
+                if(user && user.length && user[0].email!=req.user.email)
+                {
+                    return res.status(401).send('email already exist');
+                }  
+                User.findByIdAndUpdate(req.params.id,req.body,function(err,user){
+                        if(err)
+                        {   
+                            console.log(err);
+                            return ;
+                        }
+                        console.log('profile has been update');
+                        return res.redirect('back');
+                });       
+        }); 
+            
+    }else{
+       return res.status(401).send('Unautherized');
+    }
+    
+    // 
+}

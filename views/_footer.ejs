@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-
+        
     </head>
     <body>
         <div class="footer-main">
@@ -9,7 +9,7 @@
             <h3 class="nav">
                
                 <% if(locals.user) {%>
-                <a href="/users/profile">
+                <a href="/users/profile/<%=user.id%>">
                         <%=user.name%>
                 </a>        
                 <% } %>

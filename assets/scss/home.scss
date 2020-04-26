@@ -1,13 +1,8 @@
 .post-main{
     background-color: cornflowerblue;
-    // align-content: center;
-    // text-align: center;
     min-height: 90vh;
-    // margin:10px;
     padding: 10px;
-    // width: 20%;
-    // position: absolute;
-    // left:20px;
+  
 }
 .post{
     margin:5px;
@@ -63,7 +58,7 @@
     height: auto;
 }
 .capitalize{
-    text-transform: capitalize;
+    text-transform: capitalize!important;
 }
 .inset-text {
     /* Shadows are visible under slightly transparent text color */
@@ -77,12 +72,7 @@
 .danger-color{
     color: rgb(220,53,69)!important;
 }
-aside{
-//  position: absolute;;
-//   right:20px;
-//   top:2px;
-//   vertical-align: top;
-}
+
 .black{
     color:black;
 }
@@ -108,4 +98,7 @@ aside{
 }
 .friend{
     margin-bottom: 2px!important;
+}
+.li-style-numeric{
+    list-style-type:decimal !important;
 }

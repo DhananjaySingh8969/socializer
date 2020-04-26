@@ -23,3 +23,6 @@
         text-transform: capitalize; }
       .header-container .nav-bar h4 ul li a:hover {
         color: grey; }
+
+.capitalize {
+  text-transform: capitalize !important; }

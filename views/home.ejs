@@ -16,8 +16,8 @@
                 <%for(let friend of friends){%>
                     <%if(locals.user && friend.id==locals.user.id)continue;%>
 
-                    <a class="friend" href="/users/profile/<%=friend.id%>">
-                        <li class="blue custom-text "><i class="far fa-id-badge"></i><%=friend.name%></li>
+                    <a class="friend " href="/users/profile/<%=friend.id%>">
+                        <li class="blue custom-text li-style-numeric"><i class="far fa-id-badge"></i><%=friend.name%></li>
                     </a>
                 <%}%>
             </ol>

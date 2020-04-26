@@ -56,7 +56,7 @@
   height: auto; }
 
 .capitalize {
-  text-transform: capitalize; }
+  text-transform: capitalize !important; }
 
 .inset-text {
   /* Shadows are visible under slightly transparent text color */
@@ -91,3 +91,6 @@
 
 .friend {
   margin-bottom: 2px !important; }
+
+.li-style-numeric {
+  list-style-type: decimal !important; }

@@ -1,8 +1,19 @@
 <link rel="stylesheet" href="/css/user_profile.css">
 <main >
+
     <h1>USER PROFILE</h1>
-    <h4><%=all_user.name%></h4>
-    <h4><%=all_user.email%></h4>
+    <%if(locals.user && all_user.id==user.id){%>
+        <form action="/users/profile/update/<%=user.id%>" method="POST">
+            <h3>Profile Update</h3>
+            <input type="text" name="name" value="<%=user.name%>" placeholder="type your name here.." required>
+            <input type="email" name="email" value="<%=user.email%>" placeholder="type your email id here.." required>
+            <button class="btn btn-dark">update</button>
+        </form>
+    <%}else{%>
+        <h4><%=all_user.name%></h4>
+        <h4><%=all_user.email%></h4>
+    <%}%>
+    
 </main>
 
 
