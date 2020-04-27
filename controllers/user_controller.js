@@ -6,7 +6,7 @@ module.exports.profile=async function(req,res){
         return res.render('../views/user_profile.ejs',{all_user:user});
     }catch(err)
     {   
-        console.log('ERROR',err);
+         req.flash('error',err);
         return ;
     }
     
@@ -16,8 +16,9 @@ module.exports.post=function(req,res){
 }
 module.exports.signIn=function(req,res){
     if(req.isAuthenticated())
-    {
-        return res.redirect('/users/profile');
+    {   
+        req.flash('error','you have already logged in!');
+        return res.redirect(`/users/profile/${req.user.id}`);
     }else{
         return res.render('../views/user_sign_in.ejs',{
             title:"socializer/sign-in"
@@ -28,8 +29,9 @@ module.exports.signIn=function(req,res){
 module.exports.signUp=function(req,res)
 {   
     if(req.isAuthenticated())
-    {
-        return res.redirect('/users/profile');
+    {    
+        req.flash('error','you have already logged in!');
+        return res.redirect(`/users/profile/${req.user.id}`);
     }
     return res.render('../views/user_sign_up',{
         title:"socializer/sign-Up"
@@ -39,6 +41,8 @@ module.exports.signUp=function(req,res)
 //user create
 module.exports.create =async function(req, res){
     if (req.body.password != req.body.confirm_password){
+        
+        req.flash('error','confirm password didnt match with password!');
         return res.redirect('back');
     }
     try{
@@ -47,13 +51,15 @@ module.exports.create =async function(req, res){
         {
             let createdUser=await User.create(req.body);
             // console.log('account has been created');
+            req.flash('success','you have signed up successfully!');
             return res.redirect('/users/sign-in');
         }
         // console.log('user already exist');
+        req.flash('error','user already exist!');
         return res.redirect('back');
     }catch(err)
     {
-       console.log('ERROR',err);
+       req.flash('error',err);
        return ;
     }
     
@@ -61,11 +67,13 @@ module.exports.create =async function(req, res){
 
 //user sign in create a session
 module.exports.createSession=function(req,res){
+       req.flash('success','logged in successfully!');
        return res.redirect('/');
 }
 module.exports.destroySession=function(req,res)
-{
+{   
     req.logout();
+    req.flash('success','you have logged out!');
     return res.redirect('/');
 }
 module.exports.update=async function(req,res)
@@ -76,18 +84,20 @@ module.exports.update=async function(req,res)
         try{
             let user=await User.find({email:req.body.email});
             if(user && user.length && user[0].email!=req.user.email)
-            {
-                return res.status(401).send('email already exist');
+            {   
+                req.flash('error','Email already exist!');
+                return res.redirect('back');
             }  
             let updatedUser=await User.findByIdAndUpdate(req.params.id,req.body);
-            console.log('profile has been update');
+            req.flash('success','profile has been update successfully!');
             return res.redirect('back');  
         }catch(err)
         {
-           console.log('ERROR',err);
+            req.flash('error',err);
            return ;
         }       
     }else{
-       return res.status(401).send('Unautherized');
+        req.flash('error','Unautherized');
+        return res.redirect('back');
     }
 }

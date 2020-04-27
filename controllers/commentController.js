@@ -8,10 +8,11 @@ module.exports.create=async function(req,res)
         let createdComment=await Comment.create({content:req.body.content,post:req.body.postId,user:req.user._id});    
         post.comments.push(createdComment._id);
         post.save();
+        req.flash('success','comment has been posted  successfully!');
         return res.redirect('back');
    }catch(err)
    {
-        console.log('ERROR',err);
+        req.flash('error',err);
         return ;
    }
     
@@ -29,14 +30,15 @@ module.exports.destroy=async function(req,res)
             if(index>-1)
                 post.comments.splice(index, 1);
             post.save();
+            req.flash('success','comment has been deleted successfully!');
             return res.redirect('back');         
         }else{
-            console.log("unautherized to delete the comment");
+            req.flash('error','unautherized to delete the comment!');
             return res.redirect('back');
         }
     }catch(err)
     {
-        console.log('ERROR',err);
+        req.flash('error',err);
         return ;
     }
     

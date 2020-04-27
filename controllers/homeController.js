@@ -17,7 +17,7 @@ module.exports.home=async function(req,res)
         return res.render('home',{title:"HOME",posts:posts,friends:users});
     }catch(err)
     {
-        console.log("ERROR",err);
+        req.flash('error',err);
         return ;
     }
 }
