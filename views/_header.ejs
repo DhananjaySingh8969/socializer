@@ -1,34 +1,23 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    </head>
-    <body>
+<div class="header-container">
+    <div class="header-title">
+        <h2 >Socializer</h2>
+    </div>
+    <div class="nav-bar">
+        <h4>
+            <ul>
+                <% if(locals.user) {%>         
+                    <li>
+                        <a  href="/users/profile/<%=user.id%>">
+                            <%=user.name%>
+                        </a>           
+                    </li>
+                    <li><a href="/users/sign-out"> Sign out</a></li>
+                <% }else{ %>
+                    <li><a href="/users/sign-in"> Sign in</a></li>
+                    <li><a href="/users/sign-up"> Sign up</a></li>
+                <% } %>
+            </ul>
+        </h4>
+    </div>
+</div>
         
-        <div class="header-container">
-            <div class="header-title">
-                <h2 >Socializer</h2>
-            </div>
-            <div class="nav-bar">
-                <h4>
-                    <ul>
-                        <% if(locals.user) {%>
-                            
-                            <li>
-                                <a  href="/users/profile/<%=user.id%>">
-                                    <%=user.name%>
-                                </a>
-                                
-                            </li>
-                            <li><a href="/users/sign-out"> Sign out</a></li>
-                        <% }else{ %>
-                            <li><a href="/users/sign-in"> Sign in</a></li>
-                            <li><a href="/users/sign-up"> Sign up</a></li>
-                        <% } %>
-                    </ul>
-                </h4>
-            </div>
-        </div>
-        
-       
-    </body>
-</html>

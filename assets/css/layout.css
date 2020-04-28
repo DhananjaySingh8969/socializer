@@ -1,4 +1,3 @@
-body {
-  margin: 0px;
+.layout-main {
   background-color: cornflowerblue;
-  text-align: center; }
+  min-height: 85vh; }
