@@ -1,9 +1,9 @@
- <div class="list-group-item list-group-item-action post-item">
+ <div class="list-group-item list-group-item-action post-item" id="post-item<%=post._id%>">
         <div class="d-flex w-100 justify-content-between">
-            <div class="m-1">
+            <div class="m-1  dlt-btn-container">
                 <h3 class="d-inline capitalize"><%=post.user.name%></h3>
                 <%if(locals.user && locals.user.id==post.user.id){%>
-                    <a class="btn btn-secondary btn-danger d-inline"  href="/post/destroy/<%=post._id%>" role="button" aria-expanded="false" >
+                    <a class="btn btn-secondary btn-danger d-inline" href="/post/destroy/<%=post._id%>" role="button" aria-expanded="false" >
                         Delete
                     </a>
                 <%}%>
@@ -11,5 +11,5 @@
             <small><%=post.createdAt%></small>
         </div>
         <p class="mb-1 overflow-auto inset-text"><%=post.content%></p>
-        <%-include('../comment_section/_main.ejs',{post:post}); %>
+         <%-include('../comment_section/_main.ejs',{post:post}); %>
  </div>
