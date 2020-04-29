@@ -1,6 +1,7 @@
 const User=require('../models/user');
 const path=require('path');
 const fs=require('fs');
+// const defaultAvatar="\\uploads\\users\\avatars/dafault.png"
 module.exports.profile=async function(req,res){
       
     try{
@@ -53,6 +54,8 @@ module.exports.create =async function(req, res){
         {
             let createdUser=await User.create(req.body);
             // console.log('account has been created');
+            createdUser.avatar=User.avatarPath+'/default.png';
+            createdUser.save();
             req.flash('success','you have signed up successfully!');
             return res.redirect('/users/sign-in');
         }
@@ -80,29 +83,6 @@ module.exports.destroySession=function(req,res)
 }
 module.exports.update=async function(req,res)
 {   
-    // console.log(req.body);
-    // if(req.user && req.user.id==req.params.id)
-    // { 
-    //     try{
-    //         let user=await User.find({email:req.body.email});
-    //         if(user && user.length && user[0].email!=req.user.email)
-    //         {   
-    //             req.flash('error','Email already exist!');
-    //             return res.redirect('back');
-    //         }  
-    //         let updatedUser=await User.findByIdAndUpdate(req.params.id,req.body);
-    //         req.flash('success','profile has been update successfully!');
-    //         return res.redirect('back');  
-    //     }catch(err)
-    //     {
-    //         req.flash('error',err);
-    //        return ;
-    //     }       
-    // }else{
-    //     req.flash('error','Unautherized');
-    //     return res.redirect('back');
-    // }
-    //user profile update with avatar
     if(req.user && req.user.id==req.params.id)
     { 
         try{
@@ -118,7 +98,9 @@ module.exports.update=async function(req,res)
                  if(err){console.log('*** MULTER ERROR',err); return ;}
                  userToBeUpdated.name=req.body.name;
                  userToBeUpdated.email=req.body.email;
-                 if(fs.existsSync(path.join(__dirname,'..',userToBeUpdated.avatar)) && userToBeUpdated.avatar){
+                 var pathOfAvatar;
+                 if(req.file && userToBeUpdated.avatar)pathOfAvatar=path.join(__dirname,'..',userToBeUpdated.avatar);
+                 if(pathOfAvatar && fs.existsSync(pathOfAvatar) && path.basename(pathOfAvatar)!='default.png'){
                      fs.unlinkSync(path.join(__dirname,'..',userToBeUpdated.avatar));
                  }
                  if(req.file){

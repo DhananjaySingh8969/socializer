@@ -76,6 +76,9 @@
        <div class="list-group-item list-group-item-action post-item" id="post-item${post._id}">
             <div class="d-flex w-100 justify-content-between">
                 <div class="m-1  dlt-btn-container">
+                    <small class="user-profile-image">
+                        <img src="${post.user.avatar}">
+                    </small>
                     <h3 class="d-inline capitalize">${post.user.name}</h3>
                     <a class="btn btn-secondary btn-danger d-inline " href="/post/destroy/${post._id}" role="button" aria-expanded="false" >
                             Delete

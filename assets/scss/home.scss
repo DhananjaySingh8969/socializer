@@ -1,3 +1,4 @@
+
 .post-main{
     background-color: cornflowerblue;
     min-height: 90vh;
@@ -101,4 +102,15 @@
 }
 .li-style-numeric{
     list-style-type:decimal !important;
+}
+.user-profile-image{
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    margin:15px;
+}
+.user-profile-image img{
+    height: inherit;
+    width: inherit;
+    border-radius: 50%;
 }

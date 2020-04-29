@@ -11,10 +11,16 @@ main{
     margin-left: 40%;
     
 }
+.black{
+    color:black!important;
+}
+.captalize{
+    text-transform: capitalize;
+}
 .card {
     padding-top: 20px;
     margin: 10px 0 20px 0;
-    background-color: rgba(214, 224, 226, 0.2);
+    background-color: cornflowerblue;
     border-top-width: 0;
     border-bottom-width: 2px;
     -webkit-border-radius: 3px;
@@ -93,7 +99,7 @@ main{
 .card .card-comments {
     padding: 20px;
     margin: 0;
-    background-color: #f8f8f8;
+    background-color:cornflowerblue;
 }
 
 .card .card-comments .comments-collapse-toggle {
@@ -101,8 +107,8 @@ main{
     margin: 0 20px 12px 20px;
 }
 
-.card .card-comments .comments-collapse-toggle a,
-.card .card-comments .comments-collapse-toggle span {
+.card .card-comments .comments-collapse-toggle .social-media-btn,
+.card .card-comments .comments-collapse-toggle {
     padding-right: 5px;
     overflow: hidden;
     font-size: 12px;
@@ -138,7 +144,7 @@ main{
     display: inline-block;
     width: 12rem;
     height: 12rem;
-    background-color: #ffffff;
+    background-color: cornflowerblue;
 }
 
 .card.people .card-top.green {
@@ -201,11 +207,11 @@ main{
     padding-top: 0;
     overflow: hidden;
     text-align: center;
-    background-color: rgba(214, 224, 226, 0.2);
+    background-color: cornflowerblue;
 }
 
 .card.hovercard .cardheader {
-    background: url("http://lorempixel.com/850/280/nature/4/");
+    // background: url("http://lorempixel.com/850/280/nature/4/");
     background-size: cover;
     height: 135px;
 }
@@ -252,4 +258,4 @@ main{
     margin-bottom: 17px;
 }
 
-.btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }
+.social-media-btn{ border-radius: 50%; width:32px; height:32px; line-height:18px;  }

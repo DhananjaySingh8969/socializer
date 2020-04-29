@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="/css/user_profile.css">
 <main >
+    <%-include('_userInfo',{user:all_user}); %>
     <%if(locals.user && all_user.id==user.id){%>
         <form action="/users/profile/update/<%=user.id%>" method="POST" enctype="multipart/form-data">
             <h3>Profile Update</h3>
@@ -9,9 +10,7 @@
             <button class="btn btn-dark">update</button>
         </form>
     <%}else{%>
-        <!-- <h4><%=all_user.name%></h4>
-        <h4><%=all_user.email%></h4> -->
-        <%-include('_userInfo',{user:all_user}); %>
+        
     <%}%>
     
 </main>
