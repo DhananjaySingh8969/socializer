@@ -29,6 +29,8 @@ app.use(express.urlencoded());
 
 //setting up static files
 app.use(express.static('./assets'))
+//make the upload path available to the user
+app.use('/uploads',express.static(__dirname+'/uploads'));
 
 //adding layouts
 const expressLayouts=require('express-ejs-layouts');

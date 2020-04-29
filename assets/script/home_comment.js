@@ -1,5 +1,5 @@
 {
-    console.log('hello');
+   
     //method to add comment
    function addComment(cmtForm){
          let addCommentForm=cmtForm;
@@ -16,6 +16,7 @@
                     data: $(form).serialize(),
                     success: function(data){
                         // console.log(data);
+                        $('div textarea',form).val('');
                         let commentsContianer=$(`#post-item${data.data.post} .comment-section .comments-contianer ol`);
                         let newComment=createCommentDom(data.data);
                         $(commentsContianer).prepend(newComment);

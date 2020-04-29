@@ -1,4 +1,6 @@
 const User=require('../models/user');
+const path=require('path');
+const fs=require('fs');
 module.exports.profile=async function(req,res){
       
     try{
@@ -79,6 +81,28 @@ module.exports.destroySession=function(req,res)
 module.exports.update=async function(req,res)
 {   
     // console.log(req.body);
+    // if(req.user && req.user.id==req.params.id)
+    // { 
+    //     try{
+    //         let user=await User.find({email:req.body.email});
+    //         if(user && user.length && user[0].email!=req.user.email)
+    //         {   
+    //             req.flash('error','Email already exist!');
+    //             return res.redirect('back');
+    //         }  
+    //         let updatedUser=await User.findByIdAndUpdate(req.params.id,req.body);
+    //         req.flash('success','profile has been update successfully!');
+    //         return res.redirect('back');  
+    //     }catch(err)
+    //     {
+    //         req.flash('error',err);
+    //        return ;
+    //     }       
+    // }else{
+    //     req.flash('error','Unautherized');
+    //     return res.redirect('back');
+    // }
+    //user profile update with avatar
     if(req.user && req.user.id==req.params.id)
     { 
         try{
@@ -87,8 +111,22 @@ module.exports.update=async function(req,res)
             {   
                 req.flash('error','Email already exist!');
                 return res.redirect('back');
-            }  
-            let updatedUser=await User.findByIdAndUpdate(req.params.id,req.body);
+            } 
+            // console.log(user); 
+            let userToBeUpdated=await User.findById(req.params.id);
+            User.uploadAvatar(req,res,function(err){
+                 if(err){console.log('*** MULTER ERROR',err); return ;}
+                 userToBeUpdated.name=req.body.name;
+                 userToBeUpdated.email=req.body.email;
+                 if(fs.existsSync(path.join(__dirname,'..',userToBeUpdated.avatar)) && userToBeUpdated.avatar){
+                     fs.unlinkSync(path.join(__dirname,'..',userToBeUpdated.avatar));
+                 }
+                 if(req.file){
+                    userToBeUpdated.avatar=User.avatarPath+'/'+req.file.filename;
+                 }
+                userToBeUpdated.save();
+            });
+            
             req.flash('success','profile has been update successfully!');
             return res.redirect('back');  
         }catch(err)
