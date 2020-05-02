@@ -2,6 +2,8 @@ const Comment=require('../models/comment');
 const Post =require('../models/post');
 const User=require('../models/user');
 const commentMailer=require('../mailer/comments_mailer');
+const commentEmailWorker=require('../workers/comment_email_worker');
+const queue=require('../config/kue');
 module.exports.create=async function(req,res)
 {   
    try{
@@ -12,7 +14,15 @@ module.exports.create=async function(req,res)
         let user=await User.findById(createdComment.user);
         post.save();
         createdComment.user=user;
-        commentMailer.newComment(createdComment);
+        // commentMailer.newComment(createdComment);
+        //sending comment to comment worker for delay job
+        let job=queue.create('emails',createdComment).save(function(err){
+            if(err){
+                console.log('error in enqueuing comment mailer',err);
+                return ;
+            }
+            console.log('job id',job.id);
+        });
         if(req.xhr){
             // console.log(req.xhr,'hello');
             return res.status(200).json({
