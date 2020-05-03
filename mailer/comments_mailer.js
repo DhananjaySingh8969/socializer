@@ -14,7 +14,7 @@ exports.newComment=(comment)=>{
                 console.log('error in comment mailer',err);
                 return ;
             }
-            console.log('mail sent!',info);
+            // console.log('mail sent!',info);
             return ;
      });
 }

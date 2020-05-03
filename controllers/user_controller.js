@@ -1,7 +1,10 @@
 const User=require('../models/user');
 const path=require('path');
 const fs=require('fs');
+const password_reset_mailer=require('../mailer/password_reset_mailer');
+const PasswordResetToken=require('../models/password_reset_token');
 // const defaultAvatar="\\uploads\\users\\avatars/dafault.png"
+const crypto=require('crypto');
 module.exports.profile=async function(req,res){
       
     try{
@@ -120,4 +123,94 @@ module.exports.update=async function(req,res)
         req.flash('error','Unautherized');
         return res.redirect('back');
     }
+}
+module.exports.passwordResetPage=function(req,res){
+        return res.render('../views/password_reset/user_password_reset.ejs');
+}
+
+module.exports.sendingResetLink=async function(req,res){
+    
+    // console.log(req.params);
+    try{ 
+        let user=await User.findOne(req.params);
+        if(!user)
+        {   
+            req.flash('error','Incorrect Email Id!');
+            return res.redirect('back');
+        }
+        let token=crypto.randomBytes(20).toString('hex');
+        let userToken=await PasswordResetToken.findOne({email:user.email});
+        if(!userToken)
+        {
+            userToken=await PasswordResetToken.create({
+                email:user.email,
+                token:token,
+                isValid:true
+            });
+        }
+        userToken.isValid=true;
+        userToken.token=token;
+         userToken.save();
+        let resetLink="http://localhost:8000/users/password-reset-form/"+token;
+        user.link=resetLink;
+        password_reset_mailer.resetLink(user);
+        req.flash('success','A reset link has been sent to your email!');
+        return res.redirect('/users/sign-in');
+    }catch(err)
+    {
+        req.flash('error','something went wrong:(');
+        console.log('error in sendingResetLink',err);
+        return res.redirect('back');
+    }
+    
+    
+}
+module.exports.passwordResetForm=async function(req,res)
+{      
+    try{
+        let token=await PasswordResetToken.findOne({token:req.params.token});
+        if(!token || !token.isValid)
+        {
+            return res.render('../views/password_reset/reset_form',{
+                email:null
+            });
+        }
+        // token.isValid=false;
+        // token.save();
+        return res.render('../views/password_reset/reset_form',{
+            email:token.email
+        });
+    }catch(err){
+          req.flash('error','something went wrong:(');
+         return res.redirect('back');
+    }
+        
+}
+module.exports.passwordUpdate=async function(req,res){
+    //    console.log(req.body);
+    try{
+        if(req.body.password!=req.body.confirm_password)
+        {
+            req.flash('error','confirm password didnt match:( ,please try again');
+            return res.redirect('back');
+        }
+        let user=await User.findOne({email:req.body.email});
+        user.password=req.body.password;
+        user.save();
+        let token=await PasswordResetToken.findOne({email:req.body.email});
+        token.isValid=false;
+        token.save();
+        req.flash('success','password reset successful!');
+        return res.redirect('/users/sign-in');
+        // return res.render('../views/user_sign_in.ejs',{
+        //     title:"socializer/sign-in"
+        // });
+    }catch(err)
+    {    
+        req.flash('error','something went wrong:(,please try again');
+        console.log('error in password update',err);
+        return res.redirect('back');
+    }
+        
+    
 }
