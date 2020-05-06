@@ -119,6 +119,7 @@
        </div>
        `);
     } 
+    
     createPost();
-    deletePost()
+    deletePost();
 }
