@@ -1,6 +1,6 @@
 <div class="comment-section">
     <p class="btn-group" role="group">
-        <a href="/likes/toggle/?id=<%=post._id%>&type=Post" type="button" class="btn btn-secondary postLikeBtn"><i class="fas fa-thumbs-up w-like"></i> <span>0</span></a>
+        <a href="/likes/toggle/?id=<%=post._id%>&type=Post" type="button" class="btn btn-secondary postLikeBtn"><%if(locals.user){%><i class="fas fa-thumbs-up w-like"></i><%}%> <span><%=post.likes.length%></span> Likes</a>
         <a class="btn btn-secondary comments-drop-down" data-toggle="collapse" href="#post<%=post._id%>" role="button" aria-expanded="false" aria-controls="post<%=post._id%>">
             comments
         </a>

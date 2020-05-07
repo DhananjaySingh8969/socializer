@@ -2,7 +2,7 @@
     <ol>
         <%for(let comment of post.comments){%>
             <li id="comment-item<%=comment.id%>">
-                <a  href="/likes/toggle/?id=<%=comment._id%>&type=Comment"  class="g-like cmtLikeBtn" ><i class="far fa-thumbs-up"></i> <span></span></a>
+                <a  href="/likes/toggle/?id=<%=comment._id%>&type=Comment"  class="g-like cmtLikeBtn" ><%if(locals.user){%><i class="far fa-thumbs-up"></i><%}%> <span><%=comment.likes.length%></span> likes</a>
                 <p class="comment-content d-inline"><%=comment.content%></p>
                 <small class="alert-link d-inline">
                     <%=comment.user.name%>

@@ -4,6 +4,7 @@ const User=require('../models/user');
 const commentMailer=require('../mailer/comments_mailer');
 const commentEmailWorker=require('../workers/comment_email_worker');
 const queue=require('../config/kue');
+const Like=require('../models/like');
 module.exports.create=async function(req,res)
 {   
    try{
@@ -45,14 +46,20 @@ module.exports.destroy=async function(req,res)
         // console.log(req.params);
         let comment=await Comment.findById(req.params.id);
         let commentToBeDeleted=comment;
-        comment.remove();
         let post=await Post.findById(commentToBeDeleted.post);
         if(commentToBeDeleted.user==req.user.id || (post.user==req.user.id))
-        {
-            const index = post.comments.indexOf(commentToBeDeleted.id);
-            if(index>-1)
-                post.comments.splice(index, 1);
+        {   
+            post.comments.pull((commentToBeDeleted.id));
             post.save();
+            //deleting likes associated with comments
+            let likes=commentToBeDeleted.likes;
+            if(likes)
+            {
+                for(let like of likes)
+                {
+                    await Like.findByIdAndDelete(like);
+                }
+            }
             if(req.xhr){
                 return res.status(200).json({
                     data:commentToBeDeleted.id
@@ -67,6 +74,7 @@ module.exports.destroy=async function(req,res)
     }catch(err)
     {
         req.flash('error',err);
+        console.log('error in deleting comment',err);
         return ;
     }
     

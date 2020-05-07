@@ -33,10 +33,11 @@
                    $('textarea',newPostForm).val('');
                    successMsg('post created successfully!'); 
                    addComment($(`.comment-section #newCmt${data.data._id} form`,newPost));
-                   console.log('cmt',$(`.comment-section #newCmt${data.data._id} form`,newPost));
+                   postLikeBtn($(`.comment-section p .postLikeBtn`,newPost));
+                  
                 }, 
                 error: function(error){
-                    // console.log('ERROR',error.responseText);
+                    console.log('ERROR in creating post',error.responseText);
                     errorMsg(error.responseText);
                 }
             });
@@ -57,6 +58,7 @@
                     successMsg('post deleted successfully!');
                 }, 
                 error: function(error){
+                    console.log('error in deletePostHelper',error);
                     errorMsg(error.responseText);
                 }
             });
@@ -89,6 +91,7 @@
             <p class="mb-1 overflow-auto inset-text">${post.content}</p>
             <div class="comment-section">
                 <p class="btn-group" role="group">
+                    <a href="/likes/toggle/?id=${post._id}&type=Post" type="button" class="btn btn-secondary postLikeBtn"><i class="fas fa-thumbs-up w-like"></i> <span>${post.likes.length}</span> Likes</a>
                     <a class="btn btn-secondary comments-drop-down" data-toggle="collapse" href="#post${post._id}" role="button" aria-expanded="false" aria-controls="post${post._id}">
                         comments
                     </a>  

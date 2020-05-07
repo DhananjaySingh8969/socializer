@@ -21,10 +21,12 @@
                         let newComment=createCommentDom(data.data);
                         $(commentsContianer).prepend(newComment);
                         successMsg('comment added successfully!');
-                        deleteCommentHelper($('a',newComment));
+                        deleteCommentHelper($('.dlt-cmt-btn',newComment));
+                        //console.log($('.cmtLikeBtn',newComment));
+                        cmtLikeBtn($('.cmtLikeBtn',newComment));
                     }, 
                     error: function(error){
-                        // console.log('ERROR',error.responseText);
+                        console.log('ERROR in add comment',error.responseText);
                          errorMsg(error.responseText);
                     }
                 });
@@ -36,11 +38,12 @@
            
             return $(`
                 <li id=comment-item${comment._id}>
+                    <a  href="/likes/toggle/?id=${comment._id}&type=Comment"  class="g-like cmtLikeBtn" ><i class="far fa-thumbs-up"></i><span>${comment.likes.length}</span> likes</a>
                     <p class="comment-content d-inline">${comment.content}</p>
                     <small class="alert-link d-inline">
                         ${comment.user.name}
                     </small>
-                    <a class="d-inline" href="/comment/destroy/${comment._id}"><i class="fas fa-trash fa-xs danger-color"></i></a>
+                    <a class="d-inline dlt-cmt-btn" href="/comment/destroy/${comment._id}"><i class="fas fa-trash fa-xs danger-color"></i></a>
                 </li>
             `);
     }
@@ -58,6 +61,7 @@
                         successMsg('comment  deleted successfully!');
                     }, 
                     error: function(error){
+                        console.log('error in deleteCommentHelper',error);
                         errorMsg(error.responseText);
                     }
                 });

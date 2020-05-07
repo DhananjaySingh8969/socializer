@@ -7,7 +7,7 @@ module.exports.likeToggle=async function(req,res)
 {     
     try{
         //likes/toggle/?id&type=Post
-        console.log(req.query);
+        // console.log(req.query);
         let likeable;
         let deleted=false;
         if(req.query.type=="Post")
