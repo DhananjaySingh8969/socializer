@@ -33,6 +33,7 @@
                    $('textarea',newPostForm).val('');
                    successMsg('post created successfully!'); 
                    addComment($(`.comment-section #newCmt${data.data._id} form`,newPost));
+                   deletePostHelper($('.dlt-btn-container a',newPost));
                    postLikeBtn($(`.comment-section p .postLikeBtn`,newPost));
                   
                 }, 

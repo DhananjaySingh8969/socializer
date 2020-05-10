@@ -30,14 +30,7 @@ async function deleteLikesOfComments(commentsToDeleted)
     {
         for(let comment of commentsToDeleted)
         {
-            let likesOfComment=comment.likes;
-            if(likesOfComment)
-            {
-                for(let likeOfComment of likesOfComment)
-                {
-                    await Like.findByIdAndDelete(likeOfComment);
-                }
-            }
+            await Like.deleteMany({likeable:comment._id,onModel:'Comment'});
         }
     }
 }
@@ -60,10 +53,12 @@ module.exports.destroy=async function(req,res)
         if(postToBeDeleted.user==req.user.id)
         {    
             //deleting likes of post
-            deleteLikesOfPost(postToBeDeleted.likes);
+            //  deleteLikesOfPost(postToBeDeleted.likes);
+             await Like.deleteMany({likeable:postToBeDeleted._id,onModel:'Post'});
             
             // deleting likes of comments associated with post
             let commentsToDeleted=await Comment.find({post:req.params.id});
+            //  await Like.deleteMany({_id:{$in:commentsToDeleted}});
             deleteLikesOfComments(commentsToDeleted);
             
             await Comment.deleteMany({post:req.params.id});

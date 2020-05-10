@@ -13,16 +13,33 @@
   margin-left: 8%;
   display: inline-block; }
 
-.friends-contianer {
+aside {
   vertical-align: top;
   display: inline-block;
   margin-left: 2%;
   margin-top: 10px;
   width: 25%;
-  height: 90%;
-  min-height: 100vh;
+  height: 40vh;
   text-align: center;
-  padding: 20px; }
+  padding: 20px;
+  position: sticky;
+  top: 10px; }
+
+.friends-contianer ol {
+  color: blue;
+  overflow-y: scroll;
+  max-height: 100%; }
+
+.friends-contianer ol::-webkit-scrollbar {
+  display: none; }
+
+.users-container ol {
+  color: blue;
+  overflow-y: scroll;
+  max-height: 100%; }
+
+.users-container ol::-webkit-scrollbar {
+  display: none; }
 
 .blue {
   color: blue; }
@@ -117,3 +134,17 @@
 
 i {
   cursor: pointer; }
+
+.ellipsis {
+  text-overflow: ellipsis;
+  /* Required for text-overflow to do anything */
+  white-space: nowrap;
+  overflow: hidden; }
+
+.shadow {
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000; }
+
+.all-scroll {
+  cursor: all-scroll; }

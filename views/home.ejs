@@ -1,25 +1,53 @@
 <link rel="stylesheet" href="/css/home.css">
-    <main class="post-main">
-        <header><h1>SOCIALIZER/<%=title%></h1></header>
-        <%-include('./post/_postForm');%>
-        <div class="list-group post-container inline-block">
-            <%for(let post of posts){%>
-                <%-include('./post/_main.ejs',{post:post}); %>
-            <%}%>
-        </div>
-       <div class="friends-contianer">
-            <h2 class="black mgb20"><i class="fas fa-user-friends"></i>FRIENDS</h2>
-            <ol>
-                <%for(let friend of friends){%>
-                    <%if(locals.user && friend.id==locals.user.id)continue;%>
-
-                    <a class="friend" href="/users/profile/<%=friend.id%>">
-                        <li class="blue custom-text li-style-numeric"><i class="far fa-id-badge"></i><%=friend.name%></li>
-                    </a>
+   <!-- <div class="main-content"> -->
+        <main class="post-main inline-block">
+            <header><h1>SOCIALIZER/<%=title%></h1></header>
+            <%-include('./post/_postForm');%>
+            <div class="list-group post-container ">
+                <%for(let post of posts){%>
+                    <%-include('./post/_main.ejs',{post:post}); %>
                 <%}%>
-            </ol>
-        </div>
-    </main>
+            </div>
+            <aside>
+                <%if(locals.user){%>
+                    <div class="friends-contianer inline-block shadow all-scroll ">
+                        <h2 class="black mgb20"><i class="fas fa-user-friends"></i>FRIENDS</h2>
+                        <ol>
+                            <%for(let friend of friends){%>
+                                <%if(locals.user && friend.id==locals.user.id)continue;%>
+                                <li class="blue custom-text li-style-numeric" id="ft<%=friend.id%>">
+                                    <a class="friend" href="/users/profile/<%=friend.id%>">
+                                        <div class="ellipsis inline-block" style="width:90%;color: blue;"><i class="far fa-id-badge blue "></i><%=friend.name%></div>
+                                    </a>
+                                    <a href="/users/friend-toggle/?id=<%=friend.id%>" type="button" class="btn btn-danger inline-block toggle-frnd-btn" style="font-size: 50%;width:20%;padding: 1px;">Remove friend</a>
+                                </li>
+                            <%}%>
+                        </ol>
+                    </div>
+                <%}%>
+                <div class="users-container  inline-block shadow all-scroll">
+                    <h2 class="black mgb20"><i class="fas fa-user-friends"></i>Users</h2>
+                    <ol>
+                        <%for(let user of users){%>
+                            <%if(locals.user && user.id==locals.user.id)continue;%>
+                            <li class="blue custom-text li-style-numeric" id="ft<%=user.id%>">
+                                <a class="friend" href="/users/profile/<%=user.id%>">
+                                    <div class="ellipsis inline-block" style="width:90%;color: blue;"><i class="far fa-id-badge blue "></i><%=user.name%></div>
+                                </a>
+                                <%if(locals.user){%>
+                                    <a href="/users/friend-toggle/?id=<%=user.id%>" type="button" class="btn btn-primary inline-block toggle-frnd-btn" style="font-size: 50%;width:20%;padding: 1px;">Add friend</a>
+                                <%}%>
+                            </li>
+                        <%}%>
+                    </ol>
+                </div>
+            </aside>
+            
+        </main>
+       
+   <!-- </div> -->
+    
     <script src="/script/home_post.js"></script>
     <script src="/script/home_comment.js"></script>
     <script src="/script/home_like.js"></script>
+    <script src="/script/home.js"></script>

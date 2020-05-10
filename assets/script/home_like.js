@@ -33,7 +33,7 @@
     function cmtLikeBtn(btn)
     {
         //  let toggle=false;
-         console.log(btn);
+        //  console.log(btn);
          $(btn).click(function(ev){
             ev.preventDefault();
             $.ajax({

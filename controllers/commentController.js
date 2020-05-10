@@ -52,14 +52,15 @@ module.exports.destroy=async function(req,res)
             post.comments.pull((commentToBeDeleted.id));
             post.save();
             //deleting likes associated with comments
-            let likes=commentToBeDeleted.likes;
-            if(likes)
-            {
-                for(let like of likes)
-                {
-                    await Like.findByIdAndDelete(like);
-                }
-            }
+            await Like.deleteMany({likeable:commentToBeDeleted._id,onModel:'Comment'});
+            // let likes=commentToBeDeleted.likes;
+            // if(likes)
+            // {
+            //     for(let like of likes)
+            //     {
+            //         await Like.findByIdAndDelete(like);
+            //     }
+            // }
             if(req.xhr){
                 return res.status(200).json({
                     data:commentToBeDeleted.id

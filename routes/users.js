@@ -22,4 +22,5 @@ router.get('/password-reset-page',userController.passwordResetPage);
 router.get('/sending-reset-link/:email',userController.sendingResetLink);
 router.get('/password-reset-form/:token',userController.passwordResetForm);
 router.post('/password-update',userController.passwordUpdate);
+router.post('/friend-toggle',passport.checkAuthentication,userController.friendToggle);
 module.exports=router;

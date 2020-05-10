@@ -214,3 +214,47 @@ module.exports.passwordUpdate=async function(req,res){
         
     
 }
+
+const Friendship=require('../models/friendship');
+module.exports.friendToggle=async function(req,res)
+{
+    //users/friend-toggle/?id="fsafdsa"
+    try{
+        let to_friendship=await Friendship.findOne({to_user:req.user.id,from_user:req.query.id});
+        let to_friend=await User.findById(req.user.id);
+        let from_friend=await User.findById(req.query.id);
+        let addFriend=false;
+        if(to_friendship)
+        {
+            let from_friendship=await Friendship.findOne({to_user:req.query.id,from_user:req.user.id});
+            to_friend.friends.pull(req.query.id);
+            from_friend.friends.pull(req.user.id);
+            to_friendship.remove();
+            from_friendship.remove();
+            // to_friendship.save();
+            // from_friendship.save();
+        }else{
+            await Friendship.create({to_user:req.user.id,from_user:req.query.id});
+            await Friendship.create({to_user:req.query.id,from_user:req.user.id});
+            to_friend.friends.push(req.query.id);
+            from_friend.friends.push(req.user.id);
+            addFriend=true;
+        }
+        to_friend.save();
+        from_friend.save();
+        // return res.redirect('back');
+        return res.json(200,{
+            messege:"friend successfully toggled",
+            data:{ addFriend:addFriend,
+                   to_friend:to_friend,
+                   from_friend:from_friend
+                }
+        });
+    }catch(err){
+        console.log('ERROR in Toggling friend***',err);
+        return res.json(500,{
+            messege:"INTERNAL SERVER ERROR!"
+        });
+    }
+    
+}
