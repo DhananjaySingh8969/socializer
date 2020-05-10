@@ -33,6 +33,9 @@ aside {
 .friends-contianer ol::-webkit-scrollbar {
   display: none; }
 
+.users-container {
+  z-index: 999; }
+
 .users-container ol {
   color: blue;
   overflow-y: scroll;
@@ -150,8 +153,15 @@ i {
   cursor: all-scroll; }
 
 .chat-box {
-  height: 20rem;
+  height: 0;
   width: 10rem;
   position: fixed;
-  bottom: 10px;
-  right: 20px; }
+  bottom: -5px;
+  right: 140px; }
+
+.chat-box-btn {
+  height: auto;
+  width: auto;
+  position: fixed;
+  bottom: 1rem;
+  right: 1px; }

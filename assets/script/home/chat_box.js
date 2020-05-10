@@ -31,7 +31,7 @@ msgerForm.addEventListener("submit", event => {
 function appendMessage(name, img, side, text) {
   //   Simple solution for small apps
   const msgHTML = `
-    <div class="msg ${side}-msg">
+    <div class="msg ${side}-msg word-break">
       <div class="msg-img" style="background-image: url(${img})"></div>
 
       <div class="msg-bubble">
@@ -40,7 +40,7 @@ function appendMessage(name, img, side, text) {
           <div class="msg-info-time">${formatDate(new Date())}</div>
         </div>
 
-        <div class="msg-text">${text}</div>
+        <div class="msg-text word-break">${text}</div>
       </div>
     </div>
   `;
@@ -74,3 +74,24 @@ function formatDate(date) {
 function random(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+function chatBoxBtn()
+{    
+    var toggle=true;
+    $('.chat-box-btn').click(function(ev){
+        ev.preventDefault();
+        if(toggle)
+        {
+          $('.chat-box').height('30rem');
+          $(this).css({"bottom":"25rem","border-radius":"50%","z-index":"1"});
+          $(this).text('X');
+        }else{
+          $('.chat-box').height('0rem');
+          $(this).css({"bottom":"2rem","border-radius":"0%"});
+          $(this).text('chat');
+        }
+        toggle=!toggle;
+        // console.log($('.chat-box').height());
+    })
+}
+chatBoxBtn();

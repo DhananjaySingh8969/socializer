@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/home.css">
-<!-- <link rel="stylesheet" href="/css/chat_box.css"> -->
+<link rel="stylesheet" href="/css/chat_box.css">
    <!-- <div class="main-content"> -->
         <main class="post-main inline-block">
             <header><h1>SOCIALIZER/<%=title%></h1></header>
@@ -42,10 +42,18 @@
                         <%}%>
                     </ol>
                 </div>
-            </aside>
-            <!-- <div class="chat-box">
-                <%-include('_chat_box');%>
-            </div> -->
+            </aside>  
+            <div class="chat-container chat-box-body">
+                <a class="btn btn-primary chat-box-btn" data-toggle="collapse" href="#chatBox" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Chat
+                </a> 
+                <div class="chat-box">
+                    <div class="collapse" id="chatBox">
+                        <%-include('_chat_box');%>
+                    </div> 
+                </div>
+            </div>
+           
         </main>
        
    <!-- </div> -->
