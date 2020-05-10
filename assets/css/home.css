@@ -148,3 +148,10 @@ i {
 
 .all-scroll {
   cursor: all-scroll; }
+
+.chat-box {
+  height: 20rem;
+  width: 10rem;
+  position: fixed;
+  bottom: 10px;
+  right: 20px; }
