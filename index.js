@@ -78,6 +78,11 @@ app.use(customMware.setFlash);
 // use express router
 app.use('/', require('./routes'));
 
+//setting up socket.io
+const chatServer=require('http').Server(app);
+const chatSockets=require('./config/chat_sockets').chatSockets(chatServer);
+chatServer.listen(5000);
+console.log('chat server listening at port :5000');
 
 app.listen(port,function(err){
       if(err)
