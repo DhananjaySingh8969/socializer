@@ -12,9 +12,20 @@
             }
         }
         connectionHandler()
-        {
+        {   
+            let self=this;
             this.socket.on('connect',function(){
                 console.log('connection established using socket..!');
+
+                self.socket.emit('join_room',{
+                    user_email:self.userEmail,
+                    chatroom:'socializer'
+                });
+
+                self.socket.on('user_joined',function(data){
+                    console.log('a user_joined',data);
+                });
             });
+
         }
     }
