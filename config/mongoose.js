@@ -1,7 +1,9 @@
 //requiring mongoose
 const mongoose = require('mongoose');
+
+const env=require('./environment');
 //connecting to data base
-mongoose.connect('mongodb://localhost/socializer_devlopment');
+mongoose.connect(`mongodb://localhost/${env.db}`);
 
 //acquiring the connection(to check if it connected or not)
 const db=mongoose.connection;

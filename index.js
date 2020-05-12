@@ -2,6 +2,8 @@ const express=require('express');
 const cookieParser=require('cookie-parser');
 const port=8000;
 const app=express();
+const path=require('path');
+const env=require('./config/environment');
 ///requiring the database from config 
 const db=require('./config/mongoose');
 
@@ -20,8 +22,8 @@ const sassMiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');
 const customMware=require('./config/middleware');
 app.use(sassMiddleware({
-    src:'./assets/scss',
-    dest:'./assets/css',
+    src:path.join(__dirname,env.asset_path,'/scss'),
+    dest:path.join(__dirname,env.asset_path,'/css'),
     debug:false,
     outputStyle:'extended',
     prefix:'/css'
@@ -55,7 +57,7 @@ app.set('Views','./views')
 app.use(session({
     name: 'socializer',
     // TODO change the secret before deployment in production mode
-    secret: 'blahsomething',
+    secret:env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     cookie: {

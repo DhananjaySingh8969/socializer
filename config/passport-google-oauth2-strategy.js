@@ -2,24 +2,24 @@ const passport=require('passport');
 const User=require('../models/user');
 const googleStrategy=require('passport-google-oauth').OAuth2Strategy;
 const crypto=require('crypto');
-
-const v={"web":
-   {"client_id":"351776873665-41ecj4a799kfesrpnvvuib2ukrqll05m.apps.googleusercontent.com",
-    "project_id":"socializer-275817",
-    "auth_uri":"https://accounts.google.com/o/oauth2/auth",
-    "token_uri":"https://oauth2.googleapis.com/token",
-    "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
-    "client_secret":"CX957cquKheFrfS2_15r2_sm",
-    "redirect_uris":["http://localhost:8000/users/auth/google/callback"],
-    "javascript_origins":["http://localhost:8000"]
-   }
-}
+const env=require('./environment');
+// const v={"web":
+//    {"client_id":"351776873665-41ecj4a799kfesrpnvvuib2ukrqll05m.apps.googleusercontent.com",
+//     "project_id":"socializer-275817",
+//     "auth_uri":"https://accounts.google.com/o/oauth2/auth",
+//     "token_uri":"https://oauth2.googleapis.com/token",
+//     "auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs",
+//     "client_secret":"CX957cquKheFrfS2_15r2_sm",
+//     "redirect_uris":["http://localhost:8000/users/auth/google/callback"],
+//     "javascript_origins":["http://localhost:8000"]
+//    }
+// }
 
 //tell passport to use google login
 passport.use(new googleStrategy({
-        clientID:"351776873665-41ecj4a799kfesrpnvvuib2ukrqll05m.apps.googleusercontent.com",
-        clientSecret:"CX957cquKheFrfS2_15r2_sm",
-        callbackURL:"http://localhost:8000/users/auth/google/callback"
+        clientID:env.google_client_id,
+        clientSecret:env.google_client_secret,
+        callbackURL:env.google_callback_url
     },
     function(accesssToken,refreshToken,profile,done)
     {   
