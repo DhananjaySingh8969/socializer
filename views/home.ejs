@@ -21,6 +21,7 @@
                                         <div class="ellipsis inline-block" style="width:90%;color: blue;"><i class="far fa-id-badge blue "></i><%=friend.name%></div>
                                     </a>
                                     <a href="/users/friend-toggle/?id=<%=friend.id%>" type="button" class="btn btn-danger inline-block toggle-frnd-btn" style="font-size: 50%;width:20%;padding: 1px;">Remove friend</a>
+                                    <a type="button" href="#chatBox" id="<%email%>"</a> class="btn btn-success">chat</a>
                                 </li>
                             <%}%>
                         </ol>
@@ -67,6 +68,16 @@
     <script src="/script/home/chat_engine.js"></script>
     <%if(locals.user){%>
     <script>
-        new chatEngine('user-chat-box','<%=locals.user.email%>');
+        let msger={
+           form: $(".msger-inputarea"),
+           input:$(".msger-input"),
+           chat:$('.msger-chat')
+        }
+        let user={
+            email:'<%=locals.user.email%>',
+            name:'<%=locals.user.name%>'
+            // avatar:'<%=locals.user.avatar%>'
+        }
+        new chatEngine(user,msger);
     </script>
     <%}%>

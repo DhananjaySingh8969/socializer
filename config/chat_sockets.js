@@ -8,12 +8,17 @@ module.exports.chatSockets=function(socketServer)
             console.log('socket:disconnected!');
         });
 
-        socket.on('join_room',function(data){
-              console.log('joining recieved::',data);
+        // socket.on('join_room',function(data){
+        //       console.log('joining recieved::',data);
               
-              socket.join(data.chatroom);
+        //       socket.join(data.chatroom);
               
-              io.in(data.chatroom).emit('user_joined',data);
+        //       io.in(data.chatroom).emit('user_joined',data);
+        // });
+        socket.on('send_messege',function(data){
+            console.log('send messege recieved',data);
+            socket.join(data.chatroom);
+            io.in(data.chatroom).emit('received_messege',data);
         });
     });
 }
