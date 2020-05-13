@@ -1,0 +1,4 @@
+::1 - - [13/May/2020:08:07:21 +0000] "GET / HTTP/1.1" 200 6718 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"
+::1 - - [13/May/2020:08:07:23 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"
+::1 - - [13/May/2020:08:08:44 +0000] "GET /users/profile/5ebacaa402e74b11a44d7ccb HTTP/1.1" 200 5030 "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"
+::1 - - [13/May/2020:08:08:45 +0000] "GET /users/profile/uploadsusersvatars/default.png HTTP/1.1" 404 183 "http://localhost:8000/users/profile/5ebacaa402e74b11a44d7ccb" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"

@@ -4,6 +4,8 @@ const port=8000;
 const app=express();
 const path=require('path');
 const env=require('./config/environment');
+const logger=require('morgan');
+
 ///requiring the database from config 
 const db=require('./config/mongoose');
 
@@ -21,13 +23,19 @@ const MongoStore=require('connect-mongo')(session);
 const sassMiddleware=require('node-sass-middleware');
 const flash=require('connect-flash');
 const customMware=require('./config/middleware');
-app.use(sassMiddleware({
-    src:path.join(__dirname,env.asset_path,'/scss'),
-    dest:path.join(__dirname,env.asset_path,'/css'),
-    debug:false,
-    outputStyle:'extended',
-    prefix:'/css'
-}));
+
+//CHANGE:: checked if mode is devlopment then only used scss->css
+if(env.name=='devlopment')
+{   
+    app.use(sassMiddleware({
+        src:path.join(__dirname,env.asset_path,'/scss'),
+        dest:path.join(__dirname,env.asset_path,'/css'),
+        debug:false,
+        outputStyle:'extended',
+        prefix:'/css'
+    }));
+}
+
 
 //setting cookie
 app.use(cookieParser());
@@ -39,6 +47,8 @@ app.use(express.urlencoded());
 app.use(express.static('./assets'))
 //make the upload path available to the user
 app.use('/uploads',express.static(__dirname+'/uploads'));
+
+app.use(logger(env.morgan.mode,env.morgan.options));
 
 //adding layouts
 const expressLayouts=require('express-ejs-layouts');

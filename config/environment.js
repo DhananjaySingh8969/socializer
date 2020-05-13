@@ -1,5 +1,16 @@
-// console.log(process.env.SOCIALIZER_GOOGLE_CLIENT_ID,process.env.SOCIALIZER_GOOGLE_CLIENT_SECRET,process.env.SOCIALIZER_GOOGLE_CALLBACK_URL);
-const development={
+ const path=require('path');
+ const rfs=require('rotating-file-stream');
+ const fs=require('fs');
+
+ const logDirectory=path.join(__dirname,'../production_logs');
+ fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
+
+ const accessLogStream=rfs.createStream('access.log',{
+    interval:'1d',
+    path:logDirectory
+ })
+
+ const development={
    name:'development',
    asset_path:process.env.SOCIALIZER_ASSETS_PATH,
    session_cookie_key:process.env.SOCIALIZER_SESSION_COOKIE_KEY,
@@ -17,7 +28,11 @@ const development={
     google_client_id:process.env.SOCIALIZER_GOOGLE_CLIENT_ID,
     google_client_secret:process.env.SOCIALIZER_GOOGLE_CLIENT_SECRET,
     google_callback_url:process.env.SOCIALIZER_GOOGLE_CALLBACK_URL,
-    jwt_secret:process.env.SOCIALIZER_JWT_SECRET
+    jwt_secret:process.env.SOCIALIZER_JWT_SECRET,
+    morgan:{
+        mode:'dev',
+        options:{stream:accessLogStream}
+    }
 }
 
 const production={
@@ -38,7 +53,11 @@ const production={
     google_client_id:process.env.SOCIALIZER_GOOGLE_CLIENT_ID,
     google_client_secret:process.env.SOCIALIZER_GOOGLE_CLIENT_SECRET,
     google_callback_url:process.env.SOCIALIZER_GOOGLE_CALLBACK_URL,
-    jwt_secret:process.env.SOCIALIZER_JWT_SECRET
+    jwt_secret:process.env.SOCIALIZER_JWT_SECRET,
+    morgan:{
+        mode:'combined',
+        options:{stream:accessLogStream}
+    }
 }
 
 
