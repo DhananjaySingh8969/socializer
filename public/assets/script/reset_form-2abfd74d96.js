@@ -1,0 +1,1 @@
+$("#reset-password-form").submit((function(e){$("#reset-password1").val()!=$("#reset-password2").val()&&(e.preventDefault(),alert("confirm didnt match,please try again"))}));
