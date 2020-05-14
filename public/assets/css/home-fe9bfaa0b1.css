@@ -1,0 +1,167 @@
+.post-main {
+  background-color: cornflowerblue;
+  min-height: 90vh;
+  padding: 10px; }
+
+.post {
+  margin: 5px;
+  text-align: center; }
+
+.post-container {
+  width: 60%;
+  margin-top: 10px;
+  margin-left: 8%;
+  display: inline-block; }
+
+aside {
+  vertical-align: top;
+  display: inline-block;
+  margin-left: 2%;
+  margin-top: 10px;
+  width: 25%;
+  height: 40vh;
+  text-align: center;
+  padding: 20px;
+  position: sticky;
+  top: 10px; }
+
+.friends-contianer ol {
+  color: blue;
+  overflow-y: scroll;
+  max-height: 100%; }
+
+.friends-contianer ol::-webkit-scrollbar {
+  display: none; }
+
+.users-container {
+  z-index: 999; }
+
+.users-container ol {
+  color: blue;
+  overflow-y: scroll;
+  max-height: 100%; }
+
+.users-container ol::-webkit-scrollbar {
+  display: none; }
+
+.blue {
+  color: blue; }
+
+.post-item {
+  margin: 2px; }
+
+.post-content {
+  width: 100% !important;
+  max-height: 100%;
+  overflow: wrap; }
+
+.add-comment-btn {
+  font-size: 0.9rem;
+  width: auto;
+  height: auto;
+  margin: 0px;
+  padding: 2px; }
+
+.comment-submit-btn {
+  font-size: 0.9rem;
+  width: auto;
+  height: auto;
+  margin: 0px;
+  padding: 2px; }
+
+.post-delete-btn {
+  padding: 0px;
+  padding-top: 0px;
+  margin: 0px;
+  height: auto; }
+
+.capitalize {
+  text-transform: capitalize !important; }
+
+.inset-text {
+  /* Shadows are visible under slightly transparent text color */
+  color: #282c33;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 1.3em; }
+
+.danger-color {
+  color: #dc3545 !important; }
+
+.black {
+  color: black; }
+
+.under-line {
+  text-decoration: underline; }
+
+.custom-text {
+  font-size: 1.3rem;
+  font-family: sans-serif;
+  font-weight: 450;
+  text-transform: capitalize; }
+
+.mgb20 {
+  margin-bottom: 20px; }
+
+.mg10 {
+  margin: 10px; }
+
+.mg5 {
+  margin: 5px; }
+
+.friend {
+  margin-bottom: 2px !important; }
+
+.li-style-numeric {
+  list-style-type: decimal !important; }
+
+.user-profile-image {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  margin: 15px; }
+
+.user-profile-image img {
+  height: inherit;
+  width: inherit;
+  border-radius: 50%; }
+
+.like {
+  color: #0284FE; }
+
+.w-like {
+  color: white; }
+
+.g-like {
+  color: grey; }
+
+i {
+  cursor: pointer; }
+
+.ellipsis {
+  text-overflow: ellipsis;
+  /* Required for text-overflow to do anything */
+  white-space: nowrap;
+  overflow: hidden; }
+
+.shadow {
+  -moz-box-shadow: inset 0 0 10px #000000;
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow: inset 0 0 10px #000000; }
+
+.all-scroll {
+  cursor: all-scroll; }
+
+.chat-box {
+  height: 0;
+  width: 10rem;
+  position: fixed;
+  bottom: -5px;
+  right: 140px; }
+
+.chat-box-btn {
+  height: auto;
+  width: auto;
+  position: fixed;
+  bottom: 1rem;
+  right: 1px; }

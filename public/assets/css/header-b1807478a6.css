@@ -1,0 +1,28 @@
+.header-container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px; }
+  .header-container .header-title h2 {
+    color: cornflowerblue;
+    font-family: sans-serif; }
+  .header-container .nav-bar h4 ul {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-evenly; }
+    .header-container .nav-bar h4 ul li {
+      margin: 5px;
+      list-style: none; }
+      .header-container .nav-bar h4 ul li a {
+        color: cornflowerblue;
+        text-decoration: none;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.22rem;
+        text-transform: capitalize; }
+      .header-container .nav-bar h4 ul li a:hover {
+        color: grey; }
+
+.capitalize {
+  text-transform: capitalize !important; }
