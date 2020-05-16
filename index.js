@@ -2,6 +2,8 @@ const express=require('express');
 const cookieParser=require('cookie-parser');
 const port=8000;
 const app=express();
+require('./config/view-helpers')(app);
+
 const path=require('path');
 const env=require('./config/environment');
 const logger=require('morgan');
