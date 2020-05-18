@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="<%=assetPath("/css/home.css")%>" >
-<link rel="stylesheet" href="<%=assetPath("/css/chat_box.css")%>" >
+<link rel="stylesheet" href="<%=assetPath("css/home.css")%>" >
+<link rel="stylesheet" href="<%=assetPath("css/chat_box.css")%>" >
    <!-- <div class="main-content"> -->
         <main class="post-main inline-block">
             <header><h1>SOCIALIZER/<%=title%></h1></header>
@@ -8,7 +8,7 @@
                 <%for(let post of posts){%>
                     <%-include('./post/_main.ejs',{post:post}); %>
                 <%}%>
-            </div>
+            </div>+
             <aside>
                 <%if(locals.user){%>
                     <div class="friends-contianer inline-block shadow all-scroll ">
@@ -59,13 +59,13 @@
         </main>
        
    <!-- </div> -->
-    <script src="<%=assetPath("/script/home/home_post.js")%>"></script>
-    <script src="<%=assetPath("/script/home/home_comment.js")%>" ></script>
-    <script src="<%=assetPath("/script/home/home_like.js")%>"></script>
-    <script src="<%=assetPath("/script/home/home.js")%>"></script>
-    <script src="<%=assetPath("/script/home/chat_box.js")%>"></script>
+    <script src="<%=assetPath("script/home/home_post.js")%>"></script>
+    <script src="<%=assetPath("script/home/home_comment.js")%>" ></script>
+    <script src="<%=assetPath("script/home/home_like.js")%>"></script>
+    <script src="<%=assetPath("script/home/home.js")%>"></script>
+    <script src="<%=assetPath("script/home/chat_box.js")%>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-    <script src="<%=assetPath("/script/home/chat_engine.js")%>"></script>
+    <script src="<%=assetPath("script/home/chat_engine.js")%>"></script>
     <%if(locals.user){%>
     <script>
         let msger={

@@ -46,7 +46,8 @@ app.use(cookieParser());
 app.use(express.urlencoded());
 
 //setting up static files
-app.use(express.static('./assets'))
+app.use(express.static('./assets'));
+app.use(express.static('./public/assets'));
 //make the upload path available to the user
 app.use('/uploads',express.static(__dirname+'/uploads'));
 
@@ -96,7 +97,7 @@ app.use('/', require('./routes'));
 const chatServer=require('http').Server(app);
 const chatSockets=require('./config/chat_sockets').chatSockets(chatServer);
 chatServer.listen(5000);
-console.log('chat server listening at port :5000');
+// console.log('chat server listening at port :5000');
 
 app.listen(port,function(err){
       if(err)
@@ -105,5 +106,5 @@ app.listen(port,function(err){
           return ;
       }
       
-      console.log(`Server is up and running on port number: ${port}`);
+    //   console.log(`Server is up and running on port number: ${port}`);
 });
