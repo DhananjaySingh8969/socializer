@@ -5,7 +5,7 @@
             // this.chatBoxId=$(`#${chatBoxId}`);
             this.user=user;
             this.msger= msger; 
-            this.socket=io.connect('http://localhost:5000');
+            this.socket=io.connect('http://18.224.19.194/:5000');
             if(this.user.email)
             {
                 this.connectionHandler();
@@ -15,7 +15,7 @@
         {   
             let self=this;
             this.socket.on('connect',function(){
-                console.log('connection established using socket..!');
+                // console.log('connection established using socket..!');
 
                 // self.socket.emit('join_room',{
                 //     user_email:self.userEmail,

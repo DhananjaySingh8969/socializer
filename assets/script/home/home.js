@@ -1,5 +1,5 @@
 {   
-    console.log('heello');
+    // console.log('heello');
     function toggleFriendsHelper(link)
     {   
         // console.log(link);

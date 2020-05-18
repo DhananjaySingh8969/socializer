@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/css/user_profile.css">
+<link rel="stylesheet" href="<%=assetPath("css/user_profile.css")%>">
 <main >
     <%-include('_userInfo',{user:all_user}); %>
     <%if(locals.user && all_user.id==user.id){%>
