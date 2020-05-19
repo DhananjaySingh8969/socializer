@@ -5,7 +5,7 @@
             // this.chatBoxId=$(`#${chatBoxId}`);
             this.user=user;
             this.msger= msger; 
-            this.socket=io.connect('http://18.224.190.59/:5000');
+            this.socket=io.connect('http://18.224.190.59:5000');
             if(this.user.email)
             {
                 this.connectionHandler();
