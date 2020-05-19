@@ -43,7 +43,7 @@ if(env.name=='devlopment')
 app.use(cookieParser());
 
 //for parsing post data
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:false}));
 
 //setting up static files
 app.use(express.static('./assets'));
